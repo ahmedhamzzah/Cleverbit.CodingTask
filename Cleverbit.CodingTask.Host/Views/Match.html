@@ -78,9 +78,16 @@
 
                 e.preventDefault();
 
+
+                let userData = $(this).serializeArray().reduce(function (obj, item) {
+                    obj[item.name] = item.value;
+                    return obj;
+                }, {});
+
+
                 $.ajax({
                     type: "POST",
-                    url: "/api/Match/Submit",
+                    url: "/api/MatchResult/Submit",
                     data: JSON.stringify(userData),
                     headers: {
                         "Authorization": "Basic " + localStorage.getItem('authorization')
@@ -95,7 +102,7 @@
 <body>
     <form id="mathcForm" class="form-inline container" style="padding-top: 30px">
 
-        <input type="hidden" id="matchId" name="matchId" />
+        <input type="hidden" id="MatchId" name="MatchId" />
 
         <div class="row">
             <p>Available Match:  <label id="mathcName"></label> </p>
@@ -105,11 +112,11 @@
 
         <div class="form-group mb-2 row">
             <label for="pingWithoutAuthLabel" class="sr-only">Ping Without Auth</label>
-            <input type="text" readonly class="form-control-plaintext" id="gameNumber" value="Ping Without Auth">
+            <input type="text" readonly class="form-control-plaintext" id="Value" name="Value" value="Ping Without Auth">
         </div>
         <button type="button" class="btn btn-primary mb-6" id="btnPlayNow" onclick="generateNumerForUser();" disabled>Play Now</button>
 
-        <button type="submit" class="btn btn-primary mb-6" id="btnSubmit" onclick="getPingWithAuth(); return false;" disabled>Submit</button>
+        <button type="submit" class="btn btn-primary mb-6" id="btnSubmit"  disabled>Submit</button>
     </form>
 </body>
 </html>
