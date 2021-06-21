@@ -23,7 +23,8 @@ namespace Cleverbit.CodingTask.Host.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Submit(SubmitMatchResultDto submitMatchResultDto)
+        [HttpPost]
+        public async Task<IActionResult> Submit([FromBody] SubmitMatchResultDto submitMatchResultDto)
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 

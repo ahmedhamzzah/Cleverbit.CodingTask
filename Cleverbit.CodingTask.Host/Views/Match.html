@@ -10,8 +10,9 @@
 
         function generateNumerForUser() {
             let number = getRandomNumbers(0, 100);
-            $('#gameNumber').val(number);
+            $('#Value').val(number);
             $('#btnPlayNow').hide();
+            $('#btnSubmit').prop('disabled', false);
         }
 
         function getRandomNumbers(min, max) {
@@ -23,15 +24,17 @@
         function enableOrDisablePlayButtons(show) {
             if (!show) {
                 $('#btnPlayNow').prop('disabled', true);
-                $('#btnSubmit').prop('disabled', true);
             } else {
                 $('#btnPlayNow').prop('disabled', false);
-                $('#btnSubmit').prop('disabled', false);
             }
         }
 
         function goToLoginPage() {
             window.location.href = "/Views/Login.html";
+        }
+
+        function goToResultPage() {
+            window.location.href = "/Views/Result.html";
         }
 
         $(document).ready(function () {
@@ -41,7 +44,7 @@
 
             function handleAvailableMatchSuccess(data) {
                 if (data) {
-                    $('#matchId').val(data.id);
+                    $('#MatchId').val(data.id);
                     $('#mathcName').text(data.matchName);
                     let expireDate = new Date(data.expireDate);
                     $('#matchExpireDate').text(expireDate.toLocaleDateString() + ' ' + expireDate.toLocaleTimeString());
@@ -90,10 +93,17 @@
                     url: "/api/MatchResult/Submit",
                     data: JSON.stringify(userData),
                     headers: {
-                        "Authorization": "Basic " + localStorage.getItem('authorization')
+                        "Authorization": "Basic " + localStorage.getItem('authorization'),
+                        "Content-Type": "application/json"
                     },
                     success: SubmitMatchResult
                 })
+
+                function SubmitMatchResult(data) {
+                    if (data == 1)
+                        goToResultPage();
+                }
+
             });
 
         });
