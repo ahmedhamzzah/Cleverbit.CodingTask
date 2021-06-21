@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Login.html" />
+    <None Remove="Views\Match.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Login.html" />
+    <Content Include="Views\Match.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.16" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cleverbit.CodingTask.Bl\Cleverbit.CodingTask.Bl.csproj" />
+    <ProjectReference Include="..\Cleverbit.CodingTask.Data\Cleverbit.CodingTask.Data.csproj" />
+  </ItemGroup>
+
+</Project>
